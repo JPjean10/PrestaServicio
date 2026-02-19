@@ -29,8 +29,8 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	// depdependencies descargadas
-	// jdbc
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	// mysql
+	runtimeOnly 'com.mysql:mysql-connector-j'
 	// hikari
 	implementation 'com.zaxxer:HikariCP'
 	// log4j
