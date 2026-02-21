@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.PrestaServicio.Interfaz.ILogService;
+import com.PrestaServicio.model.BaseData;
 import com.PrestaServicio.model.LogServiceModel;
 import com.PrestaServicio.model.Response2;
 import com.PrestaServicio.util.consts.CommonConsts;
@@ -28,10 +29,14 @@ public class LogServiceDaoImpl implements ILogService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private BaseData data;
+
     @Override
     public void insert(LogServiceModel request) {
         try {
             SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                    .withCatalogName(data.getSchema())
                     .withProcedureName("SP_LogService");
 
             SqlParameterSource input = new MapSqlParameterSource()
@@ -84,7 +89,5 @@ public class LogServiceDaoImpl implements ILogService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setResponseDataAndSave'");
     }
-
-
 
 }
