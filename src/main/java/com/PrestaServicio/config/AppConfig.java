@@ -10,6 +10,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.PrestaServicio.model.BaseData;
 import com.PrestaServicio.util.consts.EnvironmentConst;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -38,5 +39,12 @@ public class AppConfig implements WebMvcConfigurer{
         return new JdbcTemplate(dataSource());
     }
 
+    @Bean
+    BaseData baseData() {
+        BaseData data = new BaseData();
+        // puedes leerlo del properties también
+        data.setSchema(env.getRequiredProperty(EnvironmentConst.SPRING_DATASOURCE_HIKARI_SCHEMA));
+        return data;
+    }
 
 }
