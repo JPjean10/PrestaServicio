@@ -7,4 +7,8 @@ public class ApiConst {
     public static final String ROOT = "/";
     
     public static final String LINE = "line";
+
+    
+    // usuario
+    public static final String USUARIO = "usuario";
 }

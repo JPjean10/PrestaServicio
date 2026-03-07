@@ -20,17 +20,17 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat-runtime'
-	testImplementation 'org.springframework.boot:spring-boot-starter-data-jdbc-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	// depdependencies descargadas
-	// mysql
-	runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // depdependencies descargadas
+	// jdbc
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	// hikari
 	implementation 'com.zaxxer:HikariCP'
 	// log4j

@@ -28,7 +28,7 @@ public class ServiceLogServiceImpl implements ILogService {
     private ObjectMapper objectMapper;
 
         @Override
-    public LogServiceModel setRequestData(HttpServletRequest httpRequest, Object request, Long id_usuario) {
+    public LogServiceModel setRequestData(HttpServletRequest httpRequest, Object request, Integer id_usuario) {
 
         LogServiceModel logModel = new LogServiceModel();
 

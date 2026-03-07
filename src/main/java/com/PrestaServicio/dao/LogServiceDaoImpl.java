@@ -2,6 +2,8 @@ package com.PrestaServicio.dao;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@Qualifier(CommonConsts.PRESTA_SERVICE)
+@Qualifier(CommonConsts.PRESTA_DAO)
 @Repository
 public class LogServiceDaoImpl implements ILogService {
 
@@ -27,10 +29,12 @@ public class LogServiceDaoImpl implements ILogService {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private BaseData data;
 
     @Autowired
-    private BaseData data;
+    private ObjectMapper objectMapper;
+
+    private static final Logger logger = LogManager.getLogger(UsuarioDaoImpl.class);
 
     @Override
     public void insert(LogServiceModel request) {
@@ -55,13 +59,31 @@ public class LogServiceDaoImpl implements ILogService {
 
             jdbcCall.execute(input);
         } catch (Exception e) {
-            e.printStackTrace(); // ver en consola
-            throw e;
+            try
+            {
+                String cuerpoSolicitud = request.getRequest_body();
+                String cuerpoRespuesta = request.getResponse_body();
+
+                request.setResponse_body(null);
+                request.setRequest_body(null);
+
+                String json = objectMapper.writeValueAsString(request);
+
+                logger.error(
+                        " | jsonError: " + json +
+                        " | cuerpoSolicitud: " + cuerpoSolicitud +
+                        " | cuerpoRespuesta: " + cuerpoRespuesta +
+                        " | error: " + request.getError_());
+            }
+            catch (Exception ex)
+            {
+                logger.error(new Response2<>(ex).getErrorMssg());
+            }
         }
     }
 
     @Override
-    public LogServiceModel setRequestData(HttpServletRequest httpRequest, Object request, Long id_usuario) {
+    public LogServiceModel setRequestData(HttpServletRequest httpRequest, Object request, Integer id_usuario) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setRequestData'");
     }

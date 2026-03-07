@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public interface ILogService {
 
-    LogServiceModel setRequestData(HttpServletRequest httpRequest, Object request, Long id_usuario);
+    LogServiceModel setRequestData(HttpServletRequest httpRequest, Object request, Integer id_usuario);
 
     <T> void setResponseData(LogServiceModel logModel, Response2<T> response);
 

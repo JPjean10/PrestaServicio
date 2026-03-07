@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class LogServiceModel {
 
     private Long log_service_id;
-    private Long id_usuario;
+    private Integer id_usuario;
     private String request_code;
     private int http_status_code;
     private String ip;
@@ -24,10 +24,10 @@ public class LogServiceModel {
     public void setLog_service_id(Long log_service_id) {
         this.log_service_id = log_service_id;
     }
-    public Long getId_usuario() {
+    public Integer getId_usuario() {
         return id_usuario;
     }
-    public void setId_usuario(Long id_usuario) {
+    public void setId_usuario(Integer id_usuario) {
         this.id_usuario = id_usuario;
     }
     public String getRequest_code() {
